@@ -8,7 +8,7 @@
  * Funções Comuns
  * @namespace UtilFunc
  */
-(function generateNamespace (nameSpace){
+(function generateNamespace (nameSpace, $document, $window){
 	"use strict";
 	
 	var $public = this;
@@ -24,7 +24,7 @@
 	 * @param {string} nameSpace NameSpace a ser utilizado
 	 */
 	$static.init = function(nameSpace) {
-		window[nameSpace] = $public;
+		$window[nameSpace] = $public;
 	};
 
 	/**
@@ -34,11 +34,11 @@
 	 */ 
 	$public.domReady = function (callBack) {
 		if ($public.validate(callBack, "function")) {
-			var documentHasEventListener = document.addEventListener;
+			var documentHasEventListener = $document.addEventListener;
 
 			documentHasEventListener ? 
 				documentHasEventListener('DOMContentLoaded', callBack) : 
-				window.attachEvent('onload', callBack);
+				$window.attachEvent('onload', callBack);
 		}	
 	};
 
@@ -210,7 +210,7 @@
 		 * @memberof UtilFunc.AjaxFunction
 		 */ 
 		var removeScript = function () {
-			var bdy = document.getElementsByTagName('body')[0];
+			var bdy = $document.getElementsByTagName('body')[0];
 			bdy.removeChild(scp);
 		};
 
@@ -243,17 +243,17 @@
 	$public.addScript = function (src) {
 
 		// Cria o script
-		var scp = document.createElement('script');
+		var scp = $document.createElement('script');
 		scp.src = src;
 		scp.type = "text/javascript";
 		scp.async = true;
 
 		// Adiciona ao body
-		var bdy = document.getElementsByTagName('body')[0];
+		var bdy = $document.getElementsByTagName('body')[0];
 		bdy.appendChild(scp);
 
 		return scp;
 	};
 
 	return $static.init(nameSpace);
-}("util"));
+}("util", document, window));
