@@ -10,12 +10,14 @@
  */
 (function generateNamespace (nameSpace){
 	"use strict";
+	
 	var $public = this;
 	var $private = {};
-	  $private.attr = {};
-	  $private.version = "1";
 	var $static = $public.constructor.prototype;
-
+	
+	$private.attr = {};
+	$private.version = "1";
+	
 	/**
 	 * Inicializa o namespace
 	 * @memberof UtilFunc
@@ -56,6 +58,7 @@
 			}
 		}
 	};
+	
 	/**
 	 * Percorre objetos e arrays
 	 * @memberof UtilFunc
